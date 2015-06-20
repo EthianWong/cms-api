@@ -11,11 +11,13 @@ var privateKey = require('../conf/private');
 
 /*验证是否包含token*/
 var hasToken = function(request, res, next){
-    var params = request.body;
-    if(params["user_token"]){
+
+    var author = request.headers.authorization;
+
+    if(author){
         try{
 
-            request.tokenUser = jwt.verify(params["user_token"], privateKey);
+            request.tokenUser = jwt.verify(author, privateKey);
             console.log(request.tokenUser);
             next();
 

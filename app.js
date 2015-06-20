@@ -20,7 +20,7 @@ app.use(cookieParser());
 /*允许跨域*/
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Pagination-Total-Count,X-Requested-With,content-type");
+    res.header("Access-Control-Allow-Headers", "X-Pagination-Total-Count,X-Requested-With,content-type,Authorization");
     res.header("Access-Control-Expose-Headers", "X-Pagination-Total-Count");
     res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
     next();
