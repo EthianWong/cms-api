@@ -19,7 +19,7 @@
     //用户对象
     var admin = {
         name:"kingwind",
-        password:"123"
+        password:"123123"
     };
 
     //初始化管理员

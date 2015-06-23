@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 var plate = require('./routes/plate');
+var form_api = require('./routes/formApi');
 var render = require("./util/render");
 
 var app = express();
@@ -32,6 +33,7 @@ app.all('*', function(req, res, next) {
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/plate',plate);
+app.use('/form-api',form_api);
 
 
 app.use(function(req, res, next) {
