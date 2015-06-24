@@ -62,7 +62,7 @@
                 };
 
                 //生成token
-                var tokenVal = jwt.sign(JSON.stringify(user_token),privateKey);
+                var tokenVal = jwt.sign(JSON.stringify(user_token),author_key);
 
                 tokenVal = {token:tokenVal};
 
