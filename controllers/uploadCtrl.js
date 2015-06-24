@@ -16,7 +16,7 @@
 
         if(!params["policy"]){
 
-            render.missParas("参数缺少policy").send(res);
+            render.missParas("policy不能为空").send(res);
             return false;
 
         }

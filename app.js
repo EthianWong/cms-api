@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
 var plate = require('./routes/plate');
-var form_api = require('./routes/formApi');
+var upload = require('./routes/upload');
 var render = require("./util/render");
 
 var app = express();
@@ -17,8 +17,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-
-/*允许跨域*/
 app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "X-Pagination-Total-Count,X-Requested-With,content-type,Authorization");
@@ -33,7 +31,7 @@ app.all('*', function(req, res, next) {
 app.use('/', routes);
 app.use('/admin', admin);
 app.use('/plate',plate);
-app.use('/form-api',form_api);
+app.use('/upload',upload);
 
 
 app.use(function(req, res, next) {

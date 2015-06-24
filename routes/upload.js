@@ -4,8 +4,8 @@
  */
 var express = require('express');
 var router = express.Router();
-var formApi = require('../controllers/formApiCtrl');
+var upload = require('../controllers/uploadCtrl');
 
-router.post('/signature',formApi.getSignature);
+router.post('/signature',upload.getSignature);
 
 module.exports = router;
