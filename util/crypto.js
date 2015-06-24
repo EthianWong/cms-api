@@ -1,7 +1,7 @@
 /**
  * Created by fujunou on 2015/3/6.
  */
-var cryptoConfig = require('../conf/crypto');
+var cryptoConfig = require('../private/crypto');
 var crypto = require('crypto');
 
 /*生成token*/

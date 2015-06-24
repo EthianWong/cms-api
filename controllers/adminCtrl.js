@@ -12,7 +12,7 @@
     var jwt = require('jsonwebtoken');
 
     var _adminMgr = require('../manager/adminMgr');
-    var privateKey = require('../conf/private');
+    var author_key = require('../private/author');
     var render = require("../util/render");
     var crypto = require("../util/crypto");
 

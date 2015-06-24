@@ -7,7 +7,7 @@ var connect = require('connect');
 
 //结果处理
 var render = require("../util/render");
-var privateKey = require('../conf/private');
+var author_key = require('../private/author');
 
 /*验证是否包含token*/
 var hasToken = function(request, res, next){
@@ -17,7 +17,7 @@ var hasToken = function(request, res, next){
     if(author){
         try{
 
-            request.tokenUser = jwt.verify(author, privateKey);
+            request.tokenUser = jwt.verify(author, author_key);
             console.log(request.tokenUser);
             next();
 

@@ -7,8 +7,7 @@
     "use strict";
     var render = require("../util/render");
     var crypto = require('crypto');
-
-    var form_api_secret = "VOd01zYYBj1hAOAAYZgHremfuvI=";
+    var oss_key = require('../private/oss');
 
     module.exports.getSignature = function(req,res){
 
@@ -21,7 +20,7 @@
 
         }
 
-        var result = params["policy"] + '&' + form_api_secret;
+        var result = params["policy"] + '&' + oss_key;
 
         var md5 = crypto.createHash("md5");
 
