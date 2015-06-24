@@ -8,7 +8,7 @@
     var render = require("../util/render");
     var crypto = require('crypto');
 
-    var form_api_secret = "MK2NrTW12HVPFOnkq4pGF/04FFo=";
+    var form_api_secret = "VOd01zYYBj1hAOAAYZgHremfuvI=";
 
     module.exports.getSignature = function(req,res){
 

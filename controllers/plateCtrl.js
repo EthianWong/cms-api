@@ -58,7 +58,7 @@
 
         }).then(function(data){
 
-            render.data(data,total).send(response);
+            setTimeout(function(){render.data(data,total).send(response)},3000);
 
         }).catch(function(e){
 

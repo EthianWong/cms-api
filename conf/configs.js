@@ -6,7 +6,7 @@
     "use strict";
 
     module.exports = {
-        isDeveloper:false,
+        isDeveloper:true,
         log:{
             path:"../log/",
             name:"error.log"

@@ -55,7 +55,11 @@
             return{
                 send:function(res,req){
 
-                    if(!isNotFound){ headerError(res,500,"Internal Server Error") }
+                    if(!isNotFound){
+                        headerError(res,500,"Internal Server Error");
+                    }else{
+                        headerError(res,404);
+                    }
 
                     var stack = e.stack;
 
