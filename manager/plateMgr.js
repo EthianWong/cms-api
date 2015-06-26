@@ -56,7 +56,7 @@
 
         var query = _query(params);
 
-        query.limit(perPage).skip(perPage * pageIndex).sort({'create_time':-1});
+        query.limit(perPage).skip(perPage * pageIndex).sort({'create_time':1});
 
         query.exec(function(err,result){
             err ? callback(err, null) : callback(null, result);

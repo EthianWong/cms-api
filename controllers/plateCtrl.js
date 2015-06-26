@@ -46,7 +46,7 @@
         var paras = request.query;
 
         var default_options = {
-            "per-page":10,
+            "per-page":10000,
             "page":1
         };
 
@@ -65,7 +65,7 @@
 
         }).then(function(data){
 
-            setTimeout(function(){render.data(data,total).send(response)},3000);
+            render.data(data,total).send(response);
 
         }).catch(function(e){
 
