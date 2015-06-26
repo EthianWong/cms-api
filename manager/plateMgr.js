@@ -52,13 +52,7 @@
     * */
     module.exports.select = function(params,callback){
 
-        //如果没有每页显示数目和页码就用默认值
-        var perPage = params["per-page"] ? parseInt(params["per-page"]) : 5;
-
-
-        var pageIndex = params["page"]? parseInt(params["page"]) : 1;
-
-        pageIndex-=1;
+        var perPage = params["per-page"],pageIndex = params["page"] - 1;
 
         var query = _query(params);
 

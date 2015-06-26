@@ -8,7 +8,7 @@
 
     var _plateMgr = require('../manager/plateMgr');
     var Promise = require("bluebird");
-    var jsUtil = require('underscore');
+    var _ = require('underscore');
 
     //结果处理
     var render = require("../util/render");
@@ -45,6 +45,13 @@
 
         var paras = request.query;
 
+        var default_options = {
+            "per-page":10,
+            "page":1
+        };
+
+        paras = _.extend(default_options,paras);
+
         var total = 0;
 
         //流程控制 先查询符合条件的数据总数 再返回分页数据
@@ -72,8 +79,6 @@
     module.exports.update = function(request, response){
 
         var paras = request.body;
-
-        console.log("init");
 
 
         //判断参数是否存在
@@ -104,7 +109,7 @@
 
         var arr = [];
 
-        jsUtil.each(plates,function(ele,index,list){
+        _.each(plates,function(ele,index,list){
 
             //把promise添加到arr中 形成promise队列
             arr.push(plateMgr.saveAsync(ele));
