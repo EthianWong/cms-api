@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 
 var routes = require('./routes/index');
 var admin = require('./routes/admin');
+var article = require('./routes/article');
 var plate = require('./routes/plate');
 var upload = require('./routes/upload');
 var render = require("./util/render");
@@ -30,6 +31,7 @@ app.all('*', function(req, res, next) {
 
 app.use('/', routes);
 app.use('/admin', admin);
+app.use('/article', article);
 app.use('/plate',plate);
 app.use('/upload',upload);
 
