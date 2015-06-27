@@ -1,16 +1,14 @@
 /**
- * Created by dell on 2015/5/29.
- * 管理员-CRUD逻辑
+ * Created by king on 2015/5/29.
+ * Admin DAO
  */
 (function(){
 
     "use strict";
 
-    var database = require('../conf/database');
-    var Admin = require('../models/admin')(database.connection);
+    var Database = require('../conf/Database');
+    var Admin = require('../models/Admin')(Database.connection);
 
-    //登录
-    //params : name , password
     module.exports.login = function(params,callback){
 
         Admin.findOne(params,{"password":0},function(err,result){

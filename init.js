@@ -1,6 +1,6 @@
 /**
  * Created by King on 2015/6/2.
- * 生成后台Admin与初始化默认文章栏目
+ * Create default administrator
  */
 (function(){
 
@@ -11,18 +11,18 @@
     var _ = require('underscore');
     var Promise = require("bluebird");
 
-    var database = require('./conf/database');
-    var _Admin = require('./models/admin')(database.connection);
-    var _Plate = require('./models/plate')(database.connection);
-    var crypto = require("./util/crypto");
+    var database = require('./conf/Database');
+    var _Admin = require('./models/Admin')(database.connection);
+    var _Plate = require('./models/Plate')(database.connection);
+    var crypto = require("./util/Crypto");
 
-    //用户对象
+    // Administrator entity
     var admin = {
         name:"kingwind",
         password:"123123"
     };
 
-    //初始化管理员
+    // Administrator init
     var init_admin = function(){
 
         admin.password = crypto.enCipher(admin.password);

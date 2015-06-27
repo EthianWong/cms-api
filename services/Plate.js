@@ -1,18 +1,14 @@
 /**
- * Created by dell on 2015/6/3.
- * 文章类型-CURD
+ * Created by King on 2015/6/3.
+ * Plate DAO
  */
 (function(){
 
     "use strict";
 
-    var database = require('../conf/database');
-    var Plate = require('../models/plate')(database.connection);
+    var Database = require('../conf/Database');
+    var Plate = require('../models/Plate')(Database.connection);
 
-    //添加类型
-    //@paras : zh_name
-    //@paras : en_name
-    //@paras : isVisible
     module.exports.create = function(params,callback){
 
         Plate.create(params,function(err,result){
@@ -43,13 +39,6 @@
         return query;
     };
 
-    /*
-    * 查询文章类型
-    * @paras : name
-    * @paras : isVisible
-    * @paras : pageIndex
-    * @paras : perPage
-    * */
     module.exports.select = function(params,callback){
 
         var perPage = params["per-page"],pageIndex = params["page"] - 1;

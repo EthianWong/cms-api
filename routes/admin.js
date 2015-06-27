@@ -1,9 +1,9 @@
 var express = require('express');
 var router = express.Router();
 
-var adminCtrl = require('../controllers/adminCtrl');
-var permission = require('../middlewares/PermissionValidate');
+var AdminController = require('../controllers/Admin');
+//var Authorization = require('../middleware/Authorization');
 
-router.post('/login',adminCtrl.login);
+router.post('/login',AdminController.login);
 
 module.exports = router;

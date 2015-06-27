@@ -1,6 +1,6 @@
 /**
- * Created by dell on 2015/5/29.
- * crypto配置
+ * Created by King on 2015/5/29.
+ * Crypto config
  */
 (function(){
 

@@ -1,6 +1,6 @@
 /**
  * Created by King on 2015/6/24.
- * oss key
+ * Oss key
  */
 (function(){
     "use strict";

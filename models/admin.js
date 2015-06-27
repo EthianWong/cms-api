@@ -1,6 +1,6 @@
 /**
  * Created by dell on 2015/6/2.
- * 后台管理员-模型
+ * Administrator model
  */
 (function(){
 
@@ -9,12 +9,13 @@
     var mongoose = require('mongoose');
 
     var schema = mongoose.Schema({
-        //用户名
+        //login name
         name:String,
-        //密码
+        //password
         password:String,
-        //最后登录时间
+        //last login
         last_login:Date
+
     },{versionKey:false});
 
     mongoose.model('admin', schema);

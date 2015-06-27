@@ -1,14 +1,14 @@
 /**
- * Created by dell on 2015/6/25.
+ * Created by King on 2015/6/25.
+ * Article DAO
  */
 (function(){
 
     "use strict";
 
-    var database = require('../conf/database');
-    var Article = require('../models/article')(database.connection);
+    var Database = require('../conf/Database');
+    var Article = require('../models/Article')(Database.connection);
 
-    //添加文章
     module.exports.add = function(params,callback){
 
         var article = new Article(params);
@@ -19,7 +19,6 @@
 
     };
 
-    //获取指定文章
     module.exports.findOne = function(params,callback){
 
         Article.findOne(params).populate('plate_id').exec(function (err, result) {
@@ -47,8 +46,6 @@
         return query;
     };
 
-
-    //根据条件获取文章列表并分页
     module.exports.select = function(params,callback){
 
         var perPage = params["per-page"],pageIndex = params["page"] - 1;
@@ -62,7 +59,6 @@
         })
     };
 
-    //根据条件获取个数
     module.exports.count = function(params,callback){
 
         var query = _query(params).count();

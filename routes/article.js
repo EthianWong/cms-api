@@ -1,16 +1,13 @@
-/**
- * Created by dell on 2015/6/25.
- */
 var express = require('express');
 var router = express.Router();
 
-var articleCtrl = require('../controllers/articleCtrl');
-var permission = require('../middlewares/PermissionValidate');
+var ArticleController = require('../controllers/Article');
+//var Authorization = require('../middleware/Authorization');
 
-router.post('/',articleCtrl.create);
+router.post('/',ArticleController.create);
 
-router.get('/:_id',articleCtrl.findOne);
+router.get('/:_id',ArticleController.findOne);
 
-router.get('/',articleCtrl.query);
+router.get('/',ArticleController.query);
 
 module.exports = router;

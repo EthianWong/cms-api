@@ -1,22 +1,22 @@
-/**
- * Created by fujunou on 2015/3/6.
- */
-var cryptoConfig = require('../private/crypto');
-var crypto = require('crypto');
+(function(){
 
-/*生成token*/
-module.exports = {
-    "enCipher":function(data){
-        var string = JSON.stringify(data);
-        var cipher = crypto.createCipher(cryptoConfig.algorithm, cryptoConfig.key);
-        var crypted = cipher.update(string, cryptoConfig.cipherDecode, cryptoConfig.cipherEncode);
-        crypted+=cipher.final(cryptoConfig.cipherEncode);
-        return crypted;
-    },
-    "deCipher":function(enCipher){
-        var decipher = crypto.createDecipher(cryptoConfig.algorithm, cryptoConfig.key);
-        var deciphered = decipher.update(enCipher, cryptoConfig.cipherEncode, cryptoConfig.cipherDecode);
-        deciphered += decipher.final(cryptoConfig.cipherDecode);
-        return JSON.parse(deciphered);
-    }
-};
+    var CryptoConfig = require('../private/Crypto');
+    var Crypto = require('crypto');
+
+    module.exports = {
+        "enCipher":function(data){
+            var string = JSON.stringify(data);
+            var cipher = Crypto.createCipher(CryptoConfig.algorithm, CryptoConfig.key);
+            var crypted = cipher.update(string, CryptoConfig.cipherDecode, CryptoConfig.cipherEncode);
+            crypted+=cipher.final(CryptoConfig.cipherEncode);
+            return crypted;
+        },
+        "deCipher":function(enCipher){
+            var decipher = Crypto.createDecipher(CryptoConfig.algorithm, CryptoConfig.key);
+            var deciphered = decipher.update(enCipher, CryptoConfig.cipherEncode, CryptoConfig.cipherDecode);
+            deciphered += decipher.final(CryptoConfig.cipherDecode);
+            return JSON.parse(deciphered);
+        }
+    };
+
+}).call(this);

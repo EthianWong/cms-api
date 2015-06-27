@@ -1,12 +1,12 @@
 /**
- * Created by dell on 2015/6/18.
- * 保存错误日志
+ * Created by King on 2015/6/18.
+ * Save error log
  */
 var moment = require("moment");
 var fs =require("fs");
 var path = require('path');
 
-var configs = require('../conf/configs');
+var Configs = require('../conf/Configs');
 
 module.exports = function(err,req){
 
@@ -37,8 +37,8 @@ module.exports = function(err,req){
 
     error = JSON.stringify(error);
 
-    var file_path = path.join(__dirname, configs.log.path);
-    var file_Name = configs.log.name;
+    var file_path = path.join(__dirname, Configs.log.path);
+    var file_Name = Configs.log.name;
 
     fs.exists(file_path, function(exists){
 

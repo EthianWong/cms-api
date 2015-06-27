@@ -1,15 +1,14 @@
 /**
  * Created by dell on 2015/5/29.
- * 验证授权中间件
+ * Authorization
  */
 var jwt = require('jsonwebtoken');
 var connect = require('connect');
 
-//结果处理
-var render = require("../util/render");
-var author_key = require('../private/author');
+var Render = require("../util/Render");
+var Author_key = require('../private/Author');
 
-/*验证是否包含token*/
+// validate authorization
 var hasToken = function(request, res, next){
 
     var author = request.headers.authorization;
@@ -17,21 +16,21 @@ var hasToken = function(request, res, next){
     if(author){
         try{
 
-            request.tokenUser = jwt.verify(author, author_key);
+            request.tokenUser = jwt.verify(author, Author_key);
             console.log(request.tokenUser);
             next();
 
         }catch(e){
-            render.notAllow.send(res);
+            Render.notAllow.send(res);
         }
 
      }else{
-        render.notAllow.send(res);
+        Render.notAllow.send(res);
      }
 };
 
 
-/*token是否到期*/
+// authorization expires
 var isExpired = function(request, res, next){
     var user = request.tokenUser;
     var date = new Date();
@@ -40,11 +39,10 @@ var isExpired = function(request, res, next){
     if(expires > now){
         next();
     }else{
-        render.allowExpire.send(res);
+        Render.allowExpire.send(res);
     }
 };
 
-/*注册身份认证模块*/
 var permission = connect().use(hasToken).use(isExpired);
 
 module.exports =permission;
