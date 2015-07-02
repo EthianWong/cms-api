@@ -6,6 +6,8 @@ var ArticleController = require('../controllers/article');
 
 router.post('/',ArticleController.create);
 
+router.put('/:id',ArticleController.update);
+
 router.get('/:_id',ArticleController.findOne);
 
 router.get('/',ArticleController.query);

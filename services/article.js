@@ -19,6 +19,14 @@
 
     };
 
+    module.exports.update = function(params,callback){
+
+        Article.findOneAndUpdate({_id:params._id},params,{new: true},function(err,result){
+            err ? callback(err, null) : callback(null, result);
+        });
+
+    };
+
     module.exports.findOne = function(params,callback){
 
         Article.findOne(params).populate('plate_id').exec(function (err, result) {

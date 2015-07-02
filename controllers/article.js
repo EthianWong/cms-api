@@ -43,6 +43,33 @@
     };
 
     /**
+     * update article
+     * @see models.article
+     */
+    module.exports.update = function(request, response){
+
+        var paras = request.body;
+
+        if(!paras["_id"]){
+
+            Render.missParas("缺少id").send(response);
+            return false;
+
+        }
+
+        ArticleService.updateAsync(paras).then(function(data){
+
+            Render.success("修改成功",data).send(response);
+
+        }).catch(function(e){
+
+            Render.exception(e).send(response);
+
+        });
+
+    };
+
+    /**
      * Find article by id
      * @param { Number }  request.params._id
      */
