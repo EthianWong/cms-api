@@ -12,4 +12,6 @@ router.get('/:_id',ArticleController.findOne);
 
 router.get('/',ArticleController.query);
 
+router.delete('/:_id',ArticleController.remove);
+
 module.exports = router;

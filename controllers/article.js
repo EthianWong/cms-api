@@ -43,6 +43,34 @@
     };
 
     /**
+     * remove article
+     * @param { Number }   request.params._id
+     */
+    module.exports.remove = function(request, response){
+
+        var params = request.params;
+
+        if(!params["_id"]){
+
+            Render.missParas("缺少ID").send(response);
+            return false;
+
+        }
+
+        ArticleService.removeAsync(params).then(function(){
+
+            Render.success("删除成功",{}).send(response);
+
+        }).catch(function(e){
+
+            Render.exception(e).send(response);
+
+        });
+
+
+    };
+
+    /**
      * update article
      * @see models.article
      */
