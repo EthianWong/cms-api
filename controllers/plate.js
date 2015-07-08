@@ -174,30 +174,33 @@
 
         var delete_id = params["_id"];
 
-        PlateService.findOneAsync({isDefault:true}).then(function(data){
+        PlateService.findOneAsync({isDefault:true}).then(function(data) {
 
-            return data._id;
+            if (delete_id == data._id) {
 
-        }).then(function(id){
+                Render.failed(400, "DELETE FAILED", "删除失败,默认栏目禁止删除", {}).send(response);
 
-            var condition = {plate_id:delete_id};
-            var model = {$set:{plate_id:id}};
-            var options = {multi:true};
+            } else {
 
-            return ArticleService.updateAsync(condition,model,options);
+                var condition = {plate_id: delete_id};
+                var model = {$set: {plate_id: data._id}};
+                var options = {multi: true};
 
-        }).then(function(){
+                ArticleService.updateAsync(condition, model, options).then(function () {
 
-            return PlateService.removeAsync({_id:delete_id});
+                    PlateService.removeAsync({_id: delete_id});
 
-        }).then(function(){
+                }).then(function () {
 
-            Render.success("删除成功",{}).send(response);
+                    Render.success("删除成功", {}).send(response);
 
-        }).catch(function(e){
+                }).catch(function (e) {
 
-            Render.exception(e).send(response);
+                    Render.exception(e).send(response);
 
+                });
+
+            }
         });
     };
 
