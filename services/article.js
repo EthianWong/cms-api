@@ -9,50 +9,12 @@
     var Database = require('../conf/database');
     var Article = require('../models/article')(Database.connection);
 
-    module.exports.add = function(params,callback){
+    var util = require('../util/global');
+    var global = require('./global');
 
-        var article = new Article(params);
+    var middleware = function(params,omitKeys){
 
-        article.save(function (err,result) {
-            err ? callback(err, null) : callback(null, result);
-        });
-
-    };
-
-    module.exports.remove = function(params,callback){
-
-        Article.remove({_id:params._id},function (err,result) {
-            err ? callback(err, null) : callback(null, result);
-        });
-
-    };
-
-    module.exports.update = function(params,callback){
-
-        Article.findOneAndUpdate({_id:params._id},params,{new: true},function(err,result){
-            err ? callback(err, null) : callback(null, result);
-        });
-
-    };
-
-    module.exports.findOne = function(params,callback){
-
-        Article.findOne(params).populate('plate_id').exec(function (err, result) {
-            err ? callback(err, null) : callback(null, result);
-        });
-    };
-
-    var _query = function(params){
-
-        var query = Article.find({},{"content":0});
-
-        if(params.isVisible){
-            query.where('isVisible',params.isVisible);
-        }
-
-        if(params.plate_id){
-            query.where('plate_id',params.plate_id);
-        }
+        var query = Article.find(util.omit(params,omitKeys),{"content":0});
 
         if(params.title){
             var reg = new RegExp(params.title);
@@ -62,26 +24,29 @@
         return query;
     };
 
-    module.exports.select = function(params,callback){
 
-        var perPage = params["per-page"],pageIndex = params["page"] - 1;
+    Article.select = function(params,sort,omitKeys,callback){
 
-        var query = _query(params);
-
-        query.limit(perPage).skip(perPage * pageIndex).sort({'update_time':-1});
+        var query = global.select(middleware,params,sort,omitKeys);
 
         query.populate('plate_id','_id zh_name en_name').exec(function(err,result){
             err ? callback(err, null) : callback(null, result);
         })
     };
 
-    module.exports.count = function(params,callback){
+    Article.findOneHavePlate = function(params,callback){
 
-        var query = _query(params).count();
-
-        query.exec(function(err,result){
+        Article.findOne(params).populate('plate_id').exec(function (err, result) {
             err ? callback(err, null) : callback(null, result);
-        })
+        });
     };
+
+
+    Article.count = function(params,omitKeys,callback){
+
+        global.count(middleware,params,omitKeys,callback);
+    };
+
+    module.exports = Article;
 
 }).call(this);

@@ -9,11 +9,6 @@
     var Database = require('../conf/database');
     var Admin = require('../models/admin')(Database.connection);
 
-    module.exports.login = function(params,callback){
-
-        Admin.findOne(params,{"password":0},function(err,result){
-            err ? callback(err, null) : callback(null, result);
-        });
-    };
+    module.exports = Admin;
 
 }).call(this);

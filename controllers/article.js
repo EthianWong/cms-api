@@ -29,7 +29,7 @@
 
         }
 
-        ArticleService.addAsync(paras).then(function(doc){
+        ArticleService.createAsync(paras).then(function(doc){
 
             var result = doc.toObject();
             Render.success("添加成功",result).send(response);
@@ -85,7 +85,11 @@
 
         }
 
-        ArticleService.updateAsync(paras).then(function(data){
+        var condition = {_id:paras._id};
+        var model = paras;
+        var options = {new:true};
+
+        ArticleService.updateAsync(condition,model,options).then(function(data){
 
             Render.success("修改成功",data).send(response);
 
@@ -112,7 +116,7 @@
 
         }
 
-        ArticleService.findOneAsync(paras).then(function(doc){
+        ArticleService.findOneHavePlateAsync(paras).then(function(doc){
 
             if(doc){
 
@@ -154,15 +158,17 @@
             "page":1
         };
 
+        var omitKeys = ["title"];
+
         paras = _.extend(default_options,paras);
 
-        ArticleService.countAsync(paras).then(function(count){
+        ArticleService.countAsync(paras,omitKeys).then(function(count){
 
             total = count;
 
         }).then(function(){
 
-            return ArticleService.selectAsync(paras);
+            return ArticleService.selectAsync(paras,{'update_time':-1},omitKeys);
 
         }).then(function(data){
 

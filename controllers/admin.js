@@ -39,7 +39,7 @@
 
         paras["password"] = Crypto.enCipher(paras["password"]);
 
-        AdminService.loginAsync(paras).then(function(doc){
+        AdminService.findOneAsync(paras,{"password":0}).then(function(doc){
 
             if(doc){
 
