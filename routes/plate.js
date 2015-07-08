@@ -12,4 +12,6 @@ router.post('/',PlateController.create);
 
 router.get('/',PlateController.query);
 
+router.delete('/:_id',PlateController.remove);
+
 module.exports = router;

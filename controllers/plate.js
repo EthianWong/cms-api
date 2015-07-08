@@ -14,6 +14,9 @@
     var Render = require("../util/render");
     var PlateService = Promise.promisifyAll(_PlateService);
 
+    var _ArticleService = require('../services/article');
+    var ArticleService = Promise.promisifyAll(_ArticleService);
+
 
     /**
      * Add plate
@@ -61,15 +64,18 @@
 
         paras = _.extend(default_options,paras);
 
+        var omitKeys = ["name"];
+
         var total = 0;
 
-        PlateService.countAsync(paras).then(function(count){
+        PlateService.countAsync(paras,omitKeys).then(function(count){
 
             total = count;
 
         }).then(function(){
 
-            return PlateService.selectAsync(paras);
+            var sort = {'create_time':-1};
+            return PlateService.selectAsync(paras,sort,omitKeys);
 
         }).then(function(data){
 
@@ -99,7 +105,11 @@
 
         }else{
 
-            PlateService.saveAsync(paras).then(function(data){
+            var condition = {_id:paras._id};
+            var model = paras;
+            var options = {new:true};
+
+            PlateService.updateAsync(condition,model,options).then(function(data){
 
                 Render.success("修改成功",data).send(response);
 
@@ -125,8 +135,12 @@
 
         _.each(plates,function(ele,index,list){
 
+            var condition = {_id:ele._id};
+            var model = ele;
+            var options = {new:true};
+
             //Create promise stream
-            arr.push(PlateService.saveAsync(ele));
+            arr.push(PlateService.updateAsync(condition,model,options));
 
         });
 
@@ -142,6 +156,50 @@
 
     };
 
+
+    /**
+     * delete plate by id
+     * @param { Number }  request.params._id
+     */
+    module.exports.remove = function(request, response){
+
+        var params = request.params;
+
+        if(!params["_id"]){
+
+            Render.missParas("缺少ID").send(response);
+            return false;
+
+        }
+
+        var delete_id = params["_id"];
+
+        PlateService.findOneAsync({isDefault:true}).then(function(data){
+
+            return data._id;
+
+        }).then(function(id){
+
+            var condition = {plate_id:delete_id};
+            var model = {$set:{plate_id:id}};
+            var options = {multi:true};
+
+            return ArticleService.updateAsync(condition,model,options);
+
+        }).then(function(){
+
+            return PlateService.removeAsync({_id:delete_id});
+
+        }).then(function(){
+
+            Render.success("删除成功",{}).send(response);
+
+        }).catch(function(e){
+
+            Render.exception(e).send(response);
+
+        });
+    };
 
 
 }).call(this);

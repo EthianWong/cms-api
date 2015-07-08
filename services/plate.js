@@ -8,28 +8,12 @@
 
     var Database = require('../conf/database');
     var Plate = require('../models/plate')(Database.connection);
+    var util = require('../util/global');
+    var global = require('./global');
 
-    module.exports.create = function(params,callback){
+    var middleware = function(params,omitKeys){
 
-        Plate.create(params,function(err,result){
-            err ? callback(err, null) : callback(null, result);
-        });
-    };
-
-    module.exports.save = function(params,callback){
-
-        Plate.findOneAndUpdate({_id:params._id},params,{new: true},function(err,result){
-            err ? callback(err, null) : callback(null, result);
-        });
-    };
-
-    var _query = function(params){
-
-        var query = Plate.find({});
-
-        if(params.isVisible){
-            query.where('isVisible',params.isVisible);
-        }
+        var query = Plate.find(util.omit(params,omitKeys));
 
         if(params.name){
             var reg = new RegExp(params.name);
@@ -39,26 +23,21 @@
         return query;
     };
 
-    module.exports.select = function(params,callback){
 
-        var perPage = params["per-page"],pageIndex = params["page"] - 1;
+    Plate.select = function(params,sort,omitKeys,callback){
 
-        var query = _query(params);
-
-        query.limit(perPage).skip(perPage * pageIndex).sort({'create_time':1});
+        var query = global.select(middleware,params,sort,omitKeys);
 
         query.exec(function(err,result){
             err ? callback(err, null) : callback(null, result);
         })
     };
 
-    module.exports.count = function(params,callback){
+    Plate.count = function(params,omitKeys,callback){
 
-        var query = _query(params).count();
-
-        query.exec(function(err,result){
-            err ? callback(err, null) : callback(null, result);
-        })
+        global.count(middleware,params,omitKeys,callback);
     };
+
+    module.exports = Plate;
 
 }).call(this);
