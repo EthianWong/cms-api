@@ -11,6 +11,8 @@
 
     connection.on('error', function (err) {
         connection.close();
+        console.log(err);
+        throw err;
     });
 
     connection.on('close', function () {
