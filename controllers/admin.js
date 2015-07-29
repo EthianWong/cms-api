@@ -56,7 +56,9 @@
 
                 // Set token's expires
                 var expires = (new Date()).getTime();
-                expires = expires + (20 * 60 * 1000);
+
+                //10 minutes
+                expires = expires + (10 * 60 * 1000);
 
                 // Set token's property
                 var user_token = {

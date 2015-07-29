@@ -17,7 +17,6 @@ var hasToken = function(request, res, next){
         try{
 
             request.tokenUser = jwt.verify(author, Author_key);
-            console.log(request.tokenUser);
             next();
 
         }catch(e){
@@ -36,13 +35,21 @@ var isExpired = function(request, res, next){
     var date = new Date();
     var now = date.getTime();
     var expires = parseInt(user.token_expires);
+
     if(expires > now){
+
+        //  extend expires times
+        user.token_expires = ((new Date()).getTime())+ (10 * 60 * 1000);
+        var authorization = jwt.sign(JSON.stringify(user),Author_key);
+        res.setHeader("X-Authorization", authorization);
         next();
+
     }else{
+
         Render.allowExpire.send(res);
+
     }
 };
-
 var permission = connect().use(hasToken).use(isExpired);
 
 module.exports =permission;
