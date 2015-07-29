@@ -85,7 +85,7 @@
         invalidInput : failed(400,"Invalid Input","缺少参数"),
         notData : failed(404,"Data Not Found","数据不存在"),
         notAllow : failed(405,"Method Not Allowed","无权限进行此操作"),
-        allowExpire :failed(405,"Allow Expired","授权过期请重新登录"),
+        allowExpire :failed(406,"Allow Expired","授权过期请重新登录"),
         serverError :failed(500,"Internal Server Error","操作失败,请重试或联系管理员"),
 
         missParas : function(message){
