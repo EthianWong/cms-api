@@ -7,6 +7,7 @@ var connect = require('connect');
 
 var Render = require("../util/render");
 var Author_key = require('../private/author');
+var Config = require("../conf/configs");
 
 // validate authorization
 var hasToken = function(request, res, next){
@@ -39,7 +40,7 @@ var isExpired = function(request, res, next){
     if(expires > now){
 
         //  extend expires times
-        user.token_expires = ((new Date()).getTime())+ (10 * 60 * 1000);
+        user.token_expires = ((new Date()).getTime())+ (Config.expires * 60 * 1000);
         var authorization = jwt.sign(JSON.stringify(user),Author_key);
         res.setHeader("X-Authorization", authorization);
         next();

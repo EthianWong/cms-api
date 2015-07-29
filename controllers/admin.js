@@ -15,6 +15,7 @@
     var Author_key = require('../private/author');
     var Render = require("../util/render");
     var Crypto = require("../util/crypto");
+    var Config = require("../conf/configs");
 
     /**
      * administrator login
@@ -57,8 +58,7 @@
                 // Set token's expires
                 var expires = (new Date()).getTime();
 
-                //10 minutes
-                expires = expires + (10 * 60 * 1000);
+                expires = expires + (Config.expires * 60 * 1000);
 
                 // Set token's property
                 var user_token = {
