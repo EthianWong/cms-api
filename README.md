@@ -1,4 +1,4 @@
-# angular-blog-static
+# blog-api
  
 这是一个CMS系统的api接口，使用了express和mongodb，我通过这个简单的项目来开始学习nodejs与非关系型数据库，希望也可以帮助到其他人
 
