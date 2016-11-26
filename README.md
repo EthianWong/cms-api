@@ -1,17 +1,26 @@
-# web-api
-this is an api for the personal website, use nodejs and express,database is MongoDb.
-<h2>Config & Install</h2>
-<h4>Config:</h4>
-<ul>
-  <li>Update "conf/database.js" as your mongodb's config</li>
-  <li>Update "init.js" file's variable "admin" as your want, will use this account to login web-manger</li>
-</ul>
-<h4>Install:</h4>
-<ul>
-  <li>npm install</li>
-  <li>If first use this project,please run "node init.js"</li>
-</ul>
-<h4>Run:</h4>
-<ul>
-  <li>npm start</li>
-</ul>
+# angular-blog-static
+ 
+这是一个CMS系统的api接口，使用了express和mongodb，我通过这个简单的项目来开始学习nodejs与非关系型数据库，希望也可以帮助到其他人
+
+### config
+- 将 "conf/database.js" 文件中的配置替换为你的配置
+- 将 "init.js" 中的 变量 "admin" 换成你想要的~
+
+### install
+```shell
+npm install
+```
+如果你是第一次运行本项目 还需要使用以下命令来初始化一些数据
+
+```shell
+node init.js
+```
+
+### install
+```shell
+npm start
+```
+
+### description
+前端的管理界面 请移步至  
+https://github.com/WindWen/angular-blog-static
