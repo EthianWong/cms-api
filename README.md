@@ -16,7 +16,7 @@ npm install
 node init.js
 ```
 
-### install
+### run
 ```shell
 npm start
 ```
